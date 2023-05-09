@@ -31,11 +31,15 @@
 </head>
 
 <body>
+  <div id="pokemon-info" class="d-flex justify-content-center">
+    <p>Total pokemons: <span id="total-pokemons"></span></p>
+    <p>&nbsp&nbsp&nbspPokemons displayed: <span id="displayed-pokemons"></span></p>
+  </div>
 
-  <div id="pokeTypesFilter">
+  <div id="pokeTypesFilter" class="d-flex justify-content-center">
     <input id="normal" class="typeFilter" type="checkbox" name="type" value="normal">
     <label htmlfor="normal" for="normal"> normal </label>
-
+    
     <input id="fighting" class="typeFilter" type="checkbox" name="type" value="fighting">
     <label htmlfor="fighting" for="fighting"> fighting </label>
 
@@ -115,10 +119,7 @@
     </div>
   </div>
 
-  <div id="pokemon-info" class="d-flex justify-content-center">
-    <p>Total pokemons: <span id="total-pokemons"></span></p>
-    <p>&nbsp&nbsp&nbspPokemons displayed: <span id="displayed-pokemons"></span></p>
-  </div>
+
   <div id="pagination"></div>
 </body>
 

@@ -21,3 +21,24 @@
   width: 100%;
   height: 100%;
 }
+
+.pokeCard:hover {
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(0,0,0,0.8);
+}
+
+.typeFilter {
+  margin-right: 5px;
+}
+
+label {
+  margin-right: 15px;
+}
+
+body {
+  background-image: url('pokemon.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
