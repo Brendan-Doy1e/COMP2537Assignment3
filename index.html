@@ -5,21 +5,21 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Comp 2537 - Assignment 3</title>
 
   <!-- import axios -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <!-- bootstrap imports -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js"
-    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-    crossorigin="anonymous"></script>
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-    crossorigin="anonymous"></script>
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+  </script>
 
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
@@ -31,6 +31,68 @@
 </head>
 
 <body>
+
+  <div id="pokeTypesFilter">
+    <input id="normal" class="typeFilter" type="checkbox" name="type" value="normal">
+    <label htmlfor="normal" for="normal"> normal </label>
+
+    <input id="fighting" class="typeFilter" type="checkbox" name="type" value="fighting">
+    <label htmlfor="fighting" for="fighting"> fighting </label>
+
+    <input id="flying" class="typeFilter" type="checkbox" name="type" value="flying">
+    <label htmlfor="flying" for="flying"> flying </label>
+
+    <input id="poison" class="typeFilter" type="checkbox" name="type" value="poison">
+    <label htmlfor="poison" for="poison"> poison </label>
+
+    <input id="ground" class="typeFilter" type="checkbox" name="type" value="ground">
+    <label htmlfor="ground" for="ground"> ground </label>
+
+    <input id="rock" class="typeFilter" type="checkbox" name="type" value="rock">
+    <label htmlfor="rock" for="rock"> rock </label>
+
+    <input id="bug" class="typeFilter" type="checkbox" name="type" value="bug">
+    <label htmlfor="bug" for="bug"> bug </label>
+
+    <input id="ghost" class="typeFilter" type="checkbox" name="type" value="ghost">
+    <label htmlfor="ghost" for="ghost"> ghost </label>
+
+    <input id="steel" class="typeFilter" type="checkbox" name="type" value="steel">
+    <label htmlfor="steel" for="steel"> steel </label>
+
+    <input id="fire" class="typeFilter" type="checkbox" name="type" value="fire">
+    <label htmlfor="fire" for="fire"> fire </label>
+
+    <input id="water" class="typeFilter" type="checkbox" name="type" value="water">
+    <label htmlfor="water" for="water"> water </label>
+
+    <input id="grass" class="typeFilter" type="checkbox" name="type" value="grass">
+    <label htmlfor="grass" for="grass"> grass </label>
+
+    <input id="electric" class="typeFilter" type="checkbox" name="type" value="electric">
+    <label htmlfor="electric" for="electric"> electric </label>
+
+    <input id="psychic" class="typeFilter" type="checkbox" name="type" value="psychic">
+    <label htmlfor="psychic" for="psychic"> psychic </label>
+
+    <input id="ice" class="typeFilter" type="checkbox" name="type" value="ice">
+    <label htmlfor="ice" for="ice"> ice </label>
+
+    <input id="dragon" class="typeFilter" type="checkbox" name="type" value="dragon">
+    <label htmlfor="dragon" for="dragon"> dragon </label>
+
+    <input id="dark" class="typeFilter" type="checkbox" name="type" value="dark">
+    <label htmlfor="dark" for="dark"> dark </label>
+
+    <input id="fairy" class="typeFilter" type="checkbox" name="type" value="fairy">
+    <label htmlfor="fairy" for="fairy"> fairy </label>
+
+    <input id="unknown" class="typeFilter" type="checkbox" name="type" value="unknown">
+    <label htmlfor="unknown" for="unknown"> unknown </label>
+
+    <input id="shadow" class="typeFilter" type="checkbox" name="type" value="shadow">
+    <label htmlfor="shadow" for="shadow"> shadow </label>
+  </div>
 
   <div id="pokeCards"></div>
 
@@ -53,8 +115,11 @@
     </div>
   </div>
 
-
-    <div id="pagination"></div>
+  <div id="pokemon-info" class="d-flex justify-content-center">
+    <p>Total pokemons: <span id="total-pokemons"></span></p>
+    <p>&nbsp&nbsp&nbspPokemons displayed: <span id="displayed-pokemons"></span></p>
+  </div>
+  <div id="pagination"></div>
 </body>
 
 </html>

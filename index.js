@@ -1,20 +1,51 @@
-const PAGE_SIZE = 10
+const PAGE_SIZE = 10;
 let currentPage = 1;
 let pokemons = []
 
-
 const updatePaginationDiv = (currentPage, numPages) => {
-  $('#pagination').empty()
+  $('#pagination').empty().addClass('d-flex justify-content-center');
 
-  const startPage = 1;
-  const endPage = numPages;
-  for (let i = startPage; i <= endPage; i++) {
-    $('#pagination').append(`
-    <button class="btn btn-primary page ml-1 numberedButtons" value="${i}">${i}</button>
-    `)
+  // Determine the start and end pages to display
+  let startPage = Math.max(1, currentPage - 2);
+  let endPage = Math.min(numPages, currentPage + 2);
+
+  // If there are not enough pages to fill the buttons, adjust the start and end accordingly
+  if (endPage - startPage < 4) {
+    if (currentPage <= 3) {
+      endPage = Math.min(numPages, 5);
+    } else {
+      startPage = Math.max(1, numPages - 4);
+    }
   }
 
-}
+  // Add previous button if not on first page
+  if (currentPage > 1) {
+    $('#pagination').append(`
+      <button class="btn btn-primary page ml-1 numberedButtons" value="${currentPage - 1}">
+        Previous
+      </button>
+    `);
+  }
+
+  // Add numbered buttons for visible pages
+  for (let i = startPage; i <= endPage; i++) {
+    $('#pagination').append(`
+      <button class="btn btn-primary page ml-1 numberedButtons ${i === currentPage ? 'active' : ''}" value="${i}">
+        ${i}
+      </button>
+    `);
+  }
+
+  // Add next button if not on last page
+  if (currentPage < numPages) {
+    $('#pagination').append(`
+      <button class="btn btn-primary page ml-1 numberedButtons" value="${currentPage + 1}">
+        Next
+      </button>
+    `);
+  }
+};
+
 
 const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
   selected_pokemons = pokemons.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
@@ -32,6 +63,8 @@ const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
         </div>  
         `)
   })
+  $('#total-pokemons').text(pokemons.length)
+  $('#displayed-pokemons').text(selected_pokemons.length)
 }
 
 const setup = async () => {
@@ -41,7 +74,6 @@ const setup = async () => {
   $('#pokeCards').empty()
   let response = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=810');
   pokemons = response.data.results;
-
 
   paginate(currentPage, PAGE_SIZE, pokemons)
   const numPages = Math.ceil(pokemons.length / PAGE_SIZE)
@@ -89,14 +121,17 @@ const setup = async () => {
         `)
   })
 
-  // add event listener to pagination buttons
-  $('body').on('click', ".numberedButtons", async function (e) {
-    currentPage = Number(e.target.value)
-    paginate(currentPage, PAGE_SIZE, pokemons)
+  // Add event listener to pagination buttons
+  $('body').on('click', '.numberedButtons', async function (e) {
+    const newPage = Number(e.target.value);
 
-    //update pagination buttons
-    updatePaginationDiv(currentPage, numPages)
-  })
+    if (newPage !== currentPage) {
+      currentPage = newPage;
+      const numPages = Math.ceil(pokemons.length / PAGE_SIZE)
+      paginate(currentPage, PAGE_SIZE, pokemons);
+      updatePaginationDiv(currentPage, numPages);
+    }
+  });
 
 }
 
