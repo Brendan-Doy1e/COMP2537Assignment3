@@ -1,6 +1,7 @@
 const PAGE_SIZE = 10;
 let currentPage = 1;
 let pokemons = []
+let pokemonTypesMap = new Map();
 
 const updatePaginationDiv = (currentPage, numPages) => {
   $('#pagination').empty().addClass('d-flex justify-content-center');
@@ -46,9 +47,20 @@ const updatePaginationDiv = (currentPage, numPages) => {
   }
 };
 
+pokemons.forEach(pokemon => {
+  pokemon.types.forEach(type => {
+    if (!pokemonTypesMap.has(type)) {
+      pokemonTypesMap.set(type, []);
+    }
+    pokemonTypesMap.get(type).push(pokemon);
+  });
+});
+
 
 const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
-  selected_pokemons = pokemons.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
+  selected_pokemons = pokemons
+    .slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
+
 
   $('#pokeCards').empty()
   selected_pokemons.forEach(async (pokemon) => {
@@ -67,29 +79,44 @@ const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
   $('#displayed-pokemons').text(selected_pokemons.length)
 }
 
+// Add event listener to type filters
+$('body').on('click', '.typeFilter', function () {
+  paginate(currentPage, PAGE_SIZE, pokemons);
+  console.log("typeFilter clicked");
+});
+
 const setup = async () => {
   // test out poke api using axios here
-
 
   $('#pokeCards').empty()
   let response = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=810');
   pokemons = response.data.results;
 
+
   paginate(currentPage, PAGE_SIZE, pokemons)
   const numPages = Math.ceil(pokemons.length / PAGE_SIZE)
   updatePaginationDiv(currentPage, numPages)
 
-
+  $('body').on('click', '.typeChk', async function (e) {
+    const typeurl = $(this).attr('typeurl')
+    console.log("typeurl: ", typeurl);
+    const res = await axios.get(`${typeurl}`)
+    console.log("res.data.pokemon: ", res.data.pokemon);
+    pokemons = res.data.pokemon.map((pokemon) => pokemon.pokemon);
+    paginate(currentPage, PAGE_SIZE, pokemons)
+    const numPages = Math.ceil(pokemons.length / PAGE_SIZE)
+    updatePaginationDiv(currentPage, numPages);
+  })
 
   // pop up modal when clicking on a pokemon card
   // add event listener to each pokemon card
   $('body').on('click', '.pokeCard', async function (e) {
     const pokemonName = $(this).attr('pokeName')
-    // console.log("pokemonName: ", pokemonName);
+    console.log("pokemonName: ", pokemonName);
     const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-    // console.log("res.data: ", res.data);
+    console.log("res.data: ", res.data);
     const types = res.data.types.map((type) => type.type.name)
-    // console.log("types: ", types);
+    console.log("types: ", types);
     $('.modal-body').html(`
         <div style="width:200px">
         <img src="${res.data.sprites.other['official-artwork'].front_default}" alt="${res.data.name}"/>

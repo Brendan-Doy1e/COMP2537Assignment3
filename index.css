@@ -42,3 +42,8 @@ body {
   background-position: center;
 }
 
+#pokemon-info, #pokeTypesFilter {
+  background-color: white;
+}
+
+
