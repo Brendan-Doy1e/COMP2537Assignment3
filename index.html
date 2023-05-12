@@ -45,26 +45,35 @@
   <div id="pokeCards"></div>
 
   <!--Modal(pop up window) for displaying the pokemon information-->
+  <!--Main container, with id, style, modal is skipped, and accessability-->
   <div id="pokeModal" class="modal fade" tabindex="-1" role="dialog">
+    <!--Wrapper div with style, and accessability-->
     <div class="modal-dialog" role="document">
+      <!--Wrapper that contains header, footer, and body with applied styles-->
       <div class="modal-content">
+        <!--div that contains the header content, and a button to close the modal-->
         <div class="modal-header">
-          <h5 class="modal-title" style="justify-content: center;">Modal title</h5>
+          <!--Title of the modal-->
+          <h5 class="modal-title">Modal title</h5>
+          <!--a button, styles, close modal trigger, accessability-->
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <!--COntains modal body content-->
         <div class="modal-body">
           <p>Modal body text goes here.</p>
         </div>
+        <!--COntains the modal footer-->
         <div class="modal-footer">
+          <!--a button, styles, close modal trigger, accessability-->
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
 
-
+  <!--Pagination for the pokemon cards, only loads 10 cards at a time-->
   <div id="pagination"></div>
 </body>
 
