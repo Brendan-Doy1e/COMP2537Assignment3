@@ -42,8 +42,11 @@ body {
   background-position: center;
 }
 
-#pokemon-info, #pokeTypesFilter {
-  background-color: white;
+#pokemon-info, #pokeFilters {
+  background-color: rgba(236, 20, 20, 0.5); /* Adding semi-transparency to the background */
+  color: #ffffff; /* Changing the text color to white */
+  font-size: 16px; /* Increasing the font size */
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5); /* Adding a subtle text shadow */
 }
 
 
